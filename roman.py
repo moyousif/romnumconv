@@ -1,18 +1,20 @@
 result = 0
 
-inputline = input('Enter the roman numerals  you want to convert:')
+inputline = input('Enter the roman numerals you want to convert: ')
 
-def add(x):
+def add(x,result):
     result += x
+    return result
 
-def sub(x):
-    result += x
+def sub(x,result):
+    result -= x
+    return result
 
 def split(input):
     return [char for char in input]
 
 inputlist = split(inputline)
-numlist = []
+numlist1 = []
 
 mnum = 1000
 dnum = 500
@@ -25,21 +27,25 @@ inum = 1
 i = 0
 
 while i < len(inputlist):
-    if inputlist[i] == 'M' : numlist.append(mnum)
-    elif inputlist[i] == 'D': numlist.append(dnum)
-    elif inputlist[i] == 'C': numlist.append(cnum)
-    elif inputlist[i] == 'L': numlist.append(lnum)
-    elif inputlist[i] == 'X': numlist.append(xnum)
-    elif inputlist[i] == 'V': numlist.append(vnum)
-    elif inputlist[i] == 'I': numlist.append(inum)
+    if inputlist[i] == 'M' : numlist1.append(mnum)
+    elif inputlist[i] == 'D': numlist1.append(dnum)
+    elif inputlist[i] == 'C': numlist1.append(cnum)
+    elif inputlist[i] == 'L': numlist1.append(lnum)
+    elif inputlist[i] == 'X': numlist1.append(xnum)
+    elif inputlist[i] == 'V': numlist1.append(vnum)
+    elif inputlist[i] == 'I': numlist1.append(inum)
     i+=1
 
 i = 0
-while i < len(numlist):
-    if numlist[i] < numlist[i+1] and i != len(numlist):
-        sub(numlist[i])
+numlist2 = numlist1
+
+for i in range(0, len(numlist1)-1):
+    if numlist1[i] < numlist2[i+1]:
+        result = sub(numlist1[i], result)
     else:
-        add(numlist[i])
-    i+=1
+        result = add(numlist1[i], result)
+
+result = add(numlist1[-1], result)
+
 
 print(result)
